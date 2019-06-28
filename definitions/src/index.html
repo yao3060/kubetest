@@ -1,0 +1,67 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #response {
+            width: 100%;
+        }
+
+        #response li {
+            list-style: decimal;
+            border-bottom: 1px #ccc dashed;
+            padding: 8px 0;
+        }
+
+        #response strong {
+            width: 400px;
+            display: inline-block;
+        }
+
+        .HOSTNAME,
+        .PDO_MYSQL,
+        .MYSQL_DB_HOST,
+        .SECRET_PASSWORD,
+        .SECRET_USERNAME {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <ul id="response" style="width: 100%"></ul>
+
+</body>
+<script type="text/javascript" src="assets/jquery-3.4.1.min.js"></script>
+<script>
+
+    jQuery(document).ready(function ($) {
+
+        var request = $.ajax({
+            url: "api.php",
+            method: "GET",
+            dataType: "json"
+        });
+
+        request.done(function (response) {
+
+            for (var element in response) {
+
+                $('#response').append(`<li class="${element}"><strong>${element}:</strong> ${response[element]}</li>`)
+            }
+
+        });
+
+        request.fail(function (jqXHR, textStatus) {
+            alert("Request failed: " + textStatus);
+        });
+
+    });
+
+</script>
+
+</html>

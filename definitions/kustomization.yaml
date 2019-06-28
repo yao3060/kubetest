@@ -1,0 +1,14 @@
+commonLabels:
+  app: app
+configMapGenerator:
+- name: app-config
+  files:
+  - .env  
+secretGenerator:
+- name: db-user-pass
+  literals:
+  - username=root
+  - password=root
+resources:
+  - mysql-deployment.yaml
+  - wordpress-deployment.yaml
